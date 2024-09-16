@@ -3,6 +3,7 @@ import { OutlineButton } from './ui/outline-button'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { getPendingGoals } from '../http/get-pending-goals'
 import { createGoalCompletion } from '../http/create-goal-completion'
+import { deleteGoal } from '../http/delete-goal'
 
 export default function PendingGoals() {
   const queryClient = useQueryClient()
@@ -24,12 +25,20 @@ export default function PendingGoals() {
     queryClient.invalidateQueries({ queryKey: ['pending-goals'] })
   }
 
+  async function handleDeleteGoal(goalId: string) {
+    await deleteGoal(goalId)
+
+    queryClient.invalidateQueries({ queryKey: ['summary'] })
+    queryClient.invalidateQueries({ queryKey: ['pending-goals'] })
+  }
+
   return (
     <div className="flex flex-wrap gap-3">
       {pendingGoals.map(goal => {
         return (
           <OutlineButton
             onClick={() => handleCompleteGoal(goal.id)}
+            onDoubleClick={() => handleDeleteGoal(goal.id)}
             key={goal.id}
             disabled={goal.completionCount >= goal.desiredWeeklyFrequency}
           >
