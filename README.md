@@ -75,6 +75,30 @@ Nunca havia usado antes, mas defitivamente mudou minhas perspectiva quanto a req
   npm i @tanstack/react-query
 ```
 
+### Definindo provider
+Para podermos utilizar o React Query na nossa aplicação precisamos implementar nosso provider no arquivo raiz que engloba os demais, no caso main.tsx
+```path
+  src/main.tsx
+```
+```tsx
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import App from './app'
+import './index.css'
+
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+
+const queryClient = new QueryClient()
+
+createRoot(document.getElementById('root')!).render(
+  <StrictMode>
+    <QueryClientProvider client={queryClient}>
+      <App />
+    </QueryClientProvider>
+  </StrictMode>
+)
+```
+
 ### Exemplo - Realizando requisição
 O useQuery é muito mais eficiente que o método "nativo" por inumeros motivos, mas principalmente pois é possivel cancelar requisições, requisitar novamente ou definir um tempo entre a requisição atual ou a próxima com muita facilidade, assim ganhando muito desempenho.
 
