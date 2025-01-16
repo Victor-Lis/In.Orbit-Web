@@ -1,6 +1,6 @@
 # In.Orbit Front-End
 
-![](https://github.com/user-attachments/assets/cb45546f-88de-4c97-a723-a62caa3a5aae)
+https://github.com/user-attachments/assets/cb45546f-88de-4c97-a723-a62caa3a5aae
 
 📋 Sobre o Projeto
 Este é o front-end do In.Orbit, uma aplicação web moderna para gerenciamento de metas e hábitos desenvolvida com:
