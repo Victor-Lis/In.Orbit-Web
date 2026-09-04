@@ -1,59 +1,60 @@
-# In.Orbit Front-End
+# In.Orbit — Front-End
 
-https://github.com/user-attachments/assets/cb45546f-88de-4c97-a723-a62caa3a5aae
+Interface web do In.Orbit, aplicação de gerenciamento de metas e hábitos semanais. Consome a API do [In.Orbit Back-End](https://github.com/Victor-Lis/In.Orbit-Back-End) para criar metas, registrar conclusões e exibir o resumo de progresso da semana.
 
-📋 Sobre o Projeto
-Este é o front-end do In.Orbit, uma aplicação web moderna para gerenciamento de metas e hábitos desenvolvida com:
+Projeto desenvolvido durante o NLW da [RocketSeat](https://www.rocketseat.com.br), construído com React, TanStack Query para cache/estado de requisições e Radix UI como base de componentes acessíveis.
 
-- ⚛️ [React](https://reactjs.org/docs/getting-started.html)
-- 🔄 [React Query](https://react-query.tanstack.com/overview)
-- 🎨 [Radix UI](https://www.radix-ui.com/docs/primitives/overview/introduction)
+## Stack
 
-O projeto foi criado durante o NLW da [RocketSeat](https://www.rocketseat.com.br) 🎓
+- [React](https://reactjs.org/) 18 + [Vite](https://vitejs.dev/)
+- [TanStack Query](https://tanstack.com/query/latest) para busca e cache de dados
+- [Radix UI](https://www.radix-ui.com/) (Dialog, Progress, Radio Group) como base dos componentes
+- [React Hook Form](https://react-hook-form.com/) + [Zod](https://zod.dev/) para formulários e validação
+- Tailwind CSS
 
-<br>
+## Arquitetura
 
-## [@radix-ui 🎨](https://www.radix-ui.com/)
-
-Uma biblioteca de componentes UI prontos para uso que mantém alta acessibilidade e customização.
-
-```javascript
-import * as ProgressPrimitive from '@radix-ui/react-progress'
-
-export function Progress(props: ProgressPrimitive.ProgressProps) {
-  return (
-    <ProgressPrimitive.Progress
-      {...props}
-      className="bg-zinc-900 rounded-full h-2"
-    />
-  )
-}
+```
+src/
+├── @types/        # Tipos das entidades (Goals, Summary)
+├── components/    # Componentes de tela (create-goal, pending-goals, summary...)
+│   └── ui/        # Componentes de base (button, dialog, input, progress-bar...)
+├── http/          # Funções de acesso à API (fetch)
+├── app.tsx        # Componente raiz
+└── main.tsx       # Entry point
 ```
 
-<br>
+As funções em `src/http/` apontam diretamente para `http://localhost:3333`, o endereço padrão do back-end em desenvolvimento local — não há variáveis de ambiente configuráveis no projeto.
 
-## [React Query 🔄](https://tanstack.com/query/latest)
+## Pré-requisitos
 
-Gerenciamento de estado e cache para requisições HTTP de forma elegante:
+- Node.js compatível com Vite 5 / React 18
+- O [In.Orbit Back-End](https://github.com/Victor-Lis/In.Orbit-Back-End) rodando em `http://localhost:3333`
 
-```javascript
-const { data: summary } = useQuery({
-  queryKey: ['summary'],
-  queryFn: getSummary,
-  staleTime: 1000 * 60 // Cache de 1 minuto
-})
+## Instalação e execução
+
+```bash
+npm install
+npm run dev       # ambiente de desenvolvimento (Vite)
 ```
 
-<br>
+## Build de produção
 
-## Ver mais
-Esse é o [Back-End](https://github.com/Victor-Lis/In.Orbit-Back-End)
+```bash
+npm run build     # tsc -b && vite build
+npm run preview   # serve o build gerado localmente
+```
 
-## Autores
+## Lint
 
-| <img src="https://github.com/Victor-Lis.png" width="100" style="border-radius:50%"/> | <img src="https://github.com/diego3g.png" width="100" style="border-radius:50%"/> |
-| --- | --- |
-| Victor Lis | Diego Fernandes |
-| Desenvolvedor | Instrutor |
+```bash
+npm run lint
+```
 
-⭐ Se este projeto te ajudou, considere dar uma estrela!
+## Testes
+
+Não há testes automatizados configurados no projeto atualmente.
+
+## Licença
+
+Ver o arquivo `LICENSE` no repositório.
